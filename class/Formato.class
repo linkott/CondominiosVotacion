@@ -1,0 +1,153 @@
+<?php
+class Formato{
+    private $nuevafecha;
+    private $genero;
+	private $mayuscula;
+	private $mes;
+	private $dia;
+	private $anno;
+	private $moneda;
+	private $hora;
+	private $ampm;
+	
+    function cambiaFecha($fecha){  // Convierte Fecha yyyy-mm-dd a dd/mm/yyyy
+	    $this->nuevafecha = $fecha;
+	    $this->nuevafecha=substr($this->nuevafecha,-2)."/".substr($this->nuevafecha,-5,2)."/".substr($this->nuevafecha,0,4);
+		return($this->nuevafecha);
+    }
+	
+	function cambiaHora($hora){  // Convierte Hora 24 horas a Hora 12 horas
+   	    $this->hora=$hora;
+		$this->ampm='am';
+		if (substr($this->hora,0,2) > 12){
+		   $this->hora="0".(substr($this->hora,0,2)-12).substr($this->hora,2,3);
+		   $this->ampm='pm';		   
+		}	    
+		return($this->hora." ".$this->ampm);
+    }
+	
+	function muestraGenero($sexo){ // Muestra Femenino o Masculino segun sea el caso.
+	    $this->genero=$sexo;
+	    if ($this->genero=="F"){ 
+		    $this->genero="Femenino";
+		}else{
+		    $this->genero="Masculino";
+		}	    
+		return($this->genero);
+    }
+	function cambiaMoneda($monto){  // Convierte A formato Moneda
+	    $this->moneda = $monto;
+	    $this->moneda=number_format($this->moneda, 2,",",".");
+		return($this->moneda);
+    }
+	function cambiaMayuscula($texto){  // Cambia a Mayusculas el Texto
+	    $this->mayuscula = $texto;
+	    $this->mayuscula=strtoupper($this->mayuscula);
+		return($this->mayuscula);
+    }
+	function muestraMes($xmes){ // Muestra el Nombre del Mes.
+	    $this->mes=$xmes;
+	    switch($this->mes){  
+			case "01":      
+				$this->mes="Enero";	
+				break;	
+			case "02":      
+				$this->mes="Febrero";	
+				break;	
+			case "03":      
+				$this->mes="Marzo";	
+				break;	
+			case "04":      
+				$this->mes="Abril";	
+				break;      			
+			case "05":      
+				$this->mes="Mayo";	
+				break;
+			case "06":      
+				$this->mes="Junio";	
+				break;
+        	case "07":      
+				$this->mes="Julio";	
+				break;	
+			case "08":      
+				$this->mes="Agosto";	
+				break;	
+			case "09":      
+				$this->mes="Septiembre";	
+				break;	
+			case "10":      
+				$this->mes="Octubre";	
+				break;      			
+			case "11":      
+				$this->mes="Noviembre";	
+				break;
+			case "12":      
+				$this->mes="Diciembre";	
+				break;
+		}		
+		return($this->mes);
+    }	
+	function muestraDiaSemana($xdia){ // Muestra el Dia de la Semana
+	    $this->dia=$xdia;
+	    switch($this->dia){  
+			case "01": 
+            case "1":
+            case "L": 			
+				$this->dia="Lunes";	
+				break;	
+			case "02": 
+            case "2":
+            case "M": 			
+				$this->dia="Martes";	
+				break;	
+			case "03":
+            case "3":
+            case "K": 			
+				$this->dia="Miércoles";	
+				break;	
+			case "04":
+            case "4":
+            case "J": 			
+				$this->dia="Jueves";	
+				break;      			
+			case "05":
+            case "5":
+            case "V": 			
+				$this->dia="Viernes";	
+				break;
+			case "06":
+            case "6":
+            case "S": 			
+				$this->dia="Sábado";	
+				break;
+        	case "07":
+            case "7":
+            case "D": 			
+				$this->dia="Domingo";	
+				break;            		
+		}		
+		return($this->dia);
+    }
+	function muestraDiasMes($xmes, $xanno){ // Muestra los Dias que tiene el Mes
+	    $this->mes=$xmes;
+		$this->anno=$xanno; // El año se utiliza solo para verifica si es bisiesto para febrero
+	    switch($this->mes){  
+			case "04": 
+            case "06":
+            case "09":
+            case "11": 		 			
+				$this->mes="30";	
+				break;	
+			case "02": 
+                if (($this->anno%4==0) && (($this->anno%100!=0)||($this->anno%400==0))){ //Bisiesto
+                    $this->mes="29";
+                }else{
+				    $this->mes="28";
+				}					
+            default: 			
+				$this->mes="31";	
+				break;            		
+		}		
+		return($this->mes);
+    }
+}

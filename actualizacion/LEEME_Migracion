@@ -1,0 +1,29 @@
+Pasos para la Migracion:
+
+Bases de datos:
+terna.net : terna(N/A)
+datacuc   : cuc(Mysql)
+datacuc   : upc(Mysql)
+comedor   : comedor(postgreSQL)
+
+Migracion terna.net BD: terna - A comedor
+Esta migracion es un archivo csv, copiarlo en /home,
+1- Entrar en el terminal.
+2- conectarse al servidor comedor.cuc.edu.ve 
+3- colocar el comando: su postgres
+4- Introducir la contraseña.
+5- colocar el comando: psql -U postgres -d comedor
+6- COPY persona (cedula,apellidos,nombre,fechanacimiento,fechaingreso,sexo, estadocivil,direccion,telhabitacion,telcelular,unidadadscripcion,email,tipopersona,idsede,estatus) FROM '/home/jreina/Inscritos20131.csv' USING DELIMITERS ';';
+
+Migracion datacuc BD: cuc - A comedor
+1- Abrir un navegador colocar en la 
+URL: comedor.cuc.edu.ve/actualizacion/comedor_integrador_cuc.php
+
+Migracion datacuc BD: upc - A comedor 
+1- Abrir un navegador colocar en la 
+URL: comedor.cuc.edu.ve/actualizacion/comedor_integrador.php
+
+
+
+ 
+
